@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+service GetBanksService{
+    rpc GetBank (BankId) returns (Bank){}
+    rpc GetNearestBank (LatLng) returns (Bank){}
+    rpc GetBanksByType (BankNameLatLng) returns (BankList){}
+    rpc GetNearestBanks (LatLngNum) returns (BankList){}
+    rpc InsertBank (Bank) returns (InsertResp){};
+}
+
+message InsertResp {
+    string resp = 1;
+}
+message BankId {
+    int32 id = 1;
+}
+message BankNameLatLng {
+    string name =1;
+    LatLng loc = 2;
+}
+message Bank {
+    string name = 1;
+    LatLng loc = 2;
+    string street = 3;
+}
+
+message LatLng {
+    double lat = 1;
+    double long = 2;
+}
+message LatLngNum {
+    LatLng loc = 1;
+    int32 num = 2;
+}
+
+message BankList {
+    repeated Bank banks = 1;
+}
+message BankWithDistance {
+    Bank bank = 1;
+    double dist = 2;
+}
+message BankName {
+    string name = 1;
+}
+
